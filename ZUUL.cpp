@@ -1,6 +1,6 @@
 #include <iostream>
 #include <string.h> // for strcmp()
-#include <vectors> // for vectors
+#include <vector> // for vectors
 
 using namespace std;
 
@@ -60,4 +60,26 @@ int main() { // main method
       cout << "the command you attempted to input does not exist! please try again." << endl;
     }
   }
+}
+
+// quit function
+void QUIT(void) {
+  // break the game loop
+  cout << "shutting down..." << endl;
+  gameRunning = false;
+}
+
+// move function
+void MOVE(void) {
+  // do the thing
+}
+
+// take function
+void TAKE(void) {
+  // do the thing
+}
+
+// drop function
+void DROP(void) {
+  // do the thing
 }
