@@ -4,6 +4,7 @@
 
 #include <iostream>
 #include <vector>
+#include <map>
 
 using namespace std;
 
@@ -25,10 +26,12 @@ class Room {
   // function prototypes
   char* getDescription();
   vector<Item*> getItems();
+  void setExits(map<char*,Room*>*);
 
   // variables
   char* description;
   vector<Item*> items;
+  map<char*,Room*>* exits;
 };
 
 // end header guard

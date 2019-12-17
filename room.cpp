@@ -21,3 +21,8 @@ char* Room::getDescription() {
 vector<Item*> Room::getItems() {
   return items;
 }
+
+// setExits function
+void Room::setExits(map<char*,Room*>* roomMap) {
+  exits = roomMap;
+}
