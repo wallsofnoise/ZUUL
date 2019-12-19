@@ -28,6 +28,7 @@ class Room {
   vector<Item*>* getItems();
   void setExits(map<char*,Room*>*);
   map<char*,Room*>* getExits();
+
   // variables
   char* description;
   vector<Item*>* items;
