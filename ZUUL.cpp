@@ -17,10 +17,10 @@ char takeF[] = "TAKE";
 char dropF[] = "DROP";
 
 // function prototypes
-void QUIT(bool &gameRunning);
-void MOVE(Room* &currentRoom);
-void TAKE(Room* &currentRoom, vector<Item*> &inv);
-void DROP(void);
+void QUIT(bool* gameRunning);
+void MOVE(Room** currentRoom);
+void TAKE(Room* currentRoom, vector<Item*>* inv);
+void DROP(Room* currentRoom, vector<Item*>* inv);
 
 int main() { // main method
 
@@ -28,20 +28,20 @@ int main() { // main method
   bool gameRunning = true;
   
   // char array to store which function has been called
-  char* calledFunction = new char[4];
+  char* calledFunction = new char[5];
 
   // char arrays to store directions
-  char* north = new char[5];
-  strcpy(north,"NORTH");
-  char* south = new char[5];
-  strcpy(south,"SOUTH");
-  char* west = new char[4];
-  strcpy(west,"WEST");
-  char* east = new char[4];
-  strcpy(east,"EAST");
+  char* north = new char[6];
+  strcpy(north,"NORTH\0");
+  char* south = new char[6];
+  strcpy(south,"SOUTH\0");
+  char* west = new char[5];
+  strcpy(west,"WEST\0");
+  char* east = new char[5];
+  strcpy(east,"EAST\0");
   
   // create player inventory
-  vector<Item*> inv;
+  vector<Item*>* inv = new vector<Item*>;
 
   // create rooms
   
@@ -139,63 +139,63 @@ int main() { // main method
 
   // item 1
   // push to proper room inv
-  r3->getItems()->push_back(new Item());
+  // r3->getItems()->push_back(new Item());
   // add name
-  r3->getItems()->at(0)->itemName = new char[20];
-  strcpy(r3->getItems()->at(0)->itemName,"Atrium Cache");
+  // r3->getItems()->at(0)->itemName = new char[20];
+  // strcpy(r3->getItems()->at(0)->itemName,"Atrium Cache");
   // add description
-  r3->getItems()->at(0)->itemDescription = new char[100];
-  strcpy(r3->getItems()->at(0)->itemDescription,"A supply cache full of glimmer.");
+  // r3->getItems()->at(0)->itemDescription = new char[100];
+  // strcpy(r3->getItems()->at(0)->itemDescription,"A supply cache full of glimmer.");
   // set id
-  r3->getItems()->at(0)->itemID = 1;
+  // r3->getItems()->at(0)->itemID = 1;
   
   // item 2
   // push to proper room inv
-  r6->getItems()->push_back(new Item());
+  // r6->getItems()->push_back(new Item());
   // add name
-  r6->getItems()->at(0)->itemName = new char[20];
-  strcpy(r6->getItems()->at(0)->itemName,"Signal Booster");
+  // r6->getItems()->at(0)->itemName = new char[20];
+  // strcpy(r6->getItems()->at(0)->itemName,"Signal Booster");
   // add description
-  r6->getItems()->at(0)->itemDescription = new char[100];
-  strcpy(r6->getItems()->at(0)->itemDescription,"A communicator signal booster.");
+  // r6->getItems()->at(0)->itemDescription = new char[100];
+  // strcpy(r6->getItems()->at(0)->itemDescription,"A communicator signal booster.");
   // set id
-  r6->getItems()->at(0)->itemID = 2;
+  // r6->getItems()->at(0)->itemID = 2;
   
   // item 3
   // push to proper room inv
-  r7->getItems()->push_back(new Item());
+  // r7->getItems()->push_back(new Item());
   // add name
-  r7->getItems()->at(0)->itemName = new char[20];
-  strcpy(r7->getItems()->at(0)->itemName,"Terminus Cache");
+  // r7->getItems()->at(0)->itemName = new char[20];
+  // strcpy(r7->getItems()->at(0)->itemName,"Terminus Cache");
   // add description
-  r7->getItems()->at(0)->itemDescription = new char[100];
-  strcpy(r7->getItems()->at(0)->itemDescription,"A supply cache full of weapons.");
+  // r7->getItems()->at(0)->itemDescription = new char[100];
+  // strcpy(r7->getItems()->at(0)->itemDescription,"A supply cache full of weapons.");
   // set id
-  r7->getItems()->at(0)->itemID = 3;
+  // r7->getItems()->at(0)->itemID = 3;
   
   // item 4
   // push to proper room inv
-  r10->getItems()->push_back(new Item());
+  // r10->getItems()->push_back(new Item());
   // add name
-  r10->getItems()->at(0)->itemName = new char[20];
-  strcpy(r10->getItems()->at(0)->itemName,"Widow's Cache");
+  // r10->getItems()->at(0)->itemName = new char[20];
+  // strcpy(r10->getItems()->at(0)->itemName,"Widow's Cache");
   // add description
-  r10->getItems()->at(0)->itemDescription = new char[100];
-  strcpy(r10->getItems()->at(0)->itemDescription,"A supply cache full of armor.");
+  // r10->getItems()->at(0)->itemDescription = new char[100];
+  // strcpy(r10->getItems()->at(0)->itemDescription,"A supply cache full of armor.");
   // set id
-  r10->getItems()->at(0)->itemID = 1;
+  // r10->getItems()->at(0)->itemID = 1;
   
   // item 5
   // push to proper room inv
-  r13->getItems()->push_back(new Item());
+  // r13->getItems()->push_back(new Item());
   // add name
-  r13->getItems()->at(0)->itemName = new char[20];
-  strcpy(r13->getItems()->at(0)->itemName,"Exotic Engram");
+  // r13->getItems()->at(0)->itemName = new char[20];
+  // strcpy(r13->getItems()->at(0)->itemName,"Exotic Engram");
   // add description
-  r13->getItems()->at(0)->itemDescription = new char[100];
-  strcpy(r13->getItems()->at(0)->itemDescription,"An engram of exotic rarity.");
+  // r13->getItems()->at(0)->itemDescription = new char[100];
+  // strcpy(r13->getItems()->at(0)->itemDescription,"An engram of exotic rarity.");
   // set id
-  r13->getItems()->at(0)->itemID = 1;
+  // r13->getItems()->at(0)->itemID = 1;
   
   
   // create maps
@@ -223,7 +223,7 @@ int main() { // main method
   map3->insert(pair<char*,Room*>(west,NULL));
   map3->insert(pair<char*,Room*>(east,NULL));
   r3->setExits(map3);
-
+  
   // room 4 map
   map<char*,Room*>* map4 = new map<char*,Room*>();
   map4->insert(pair<char*,Room*>(north,NULL));
@@ -329,6 +329,8 @@ int main() { // main method
 
   while (gameRunning == true) { // the game loop
     // provide information on current room
+    // cout << currentRoom << endl;
+    // cout << r3 << endl;
     cout << currentRoom->getDescription() << endl;
     if (currentRoom->getItems()->size() > 0) {
       cout << "current items in room:" << endl;
@@ -346,13 +348,13 @@ int main() { // main method
     // if quit function is called
     if (strcmp(calledFunction,quitF) == 0) {
       // perform function
-      QUIT(gameRunning);
+      QUIT(&gameRunning);
     }
 
     // if move function is called
     else if (strcmp(calledFunction,moveF) == 0) {
       // perform function
-      MOVE(currentRoom);
+      MOVE(&currentRoom);
     }
 
     // if take function is called
@@ -363,7 +365,7 @@ int main() { // main method
 
     // if drop function is called
     else if (strcmp(calledFunction,dropF) == 0) {
-      DROP();
+      DROP(currentRoom,inv);
     }
 
     // if input is invalid, inform user
@@ -374,14 +376,14 @@ int main() { // main method
 }
 
 // quit function
-void QUIT(bool &gameRunning) {
+void QUIT(bool* gameRunning) {
   // break the game loop
   cout << "shutting down..." << endl;
-  gameRunning = false;
+  *gameRunning = false;
 }
 
 // move function
-void MOVE(Room* &currentRoom) {
+void MOVE(Room** currentRoom) {
   char* directionMoved;
   // prompt input for direction
   cout << "which direction would you like to move? (NORTH, SOUTH, EAST, WEST)" << endl;
@@ -390,13 +392,15 @@ void MOVE(Room* &currentRoom) {
   // create iterator
   map<char*,Room*>::iterator it;
   // move through iterator
-  for (it = (currentRoom->getExits())->begin(); it != (currentRoom->getExits())->end(); it++) {
+  for (it = ((*currentRoom)->getExits())->begin(); it != ((*currentRoom)->getExits())->end(); it++) {
+    cout << it;
     // if the direction inputted works
     if(strcmp(directionMoved,(*it).first) == 0) {
       if ((*it).second != NULL) {
 	// move to that room
-	currentRoom = (*it).second;
+	*currentRoom = (*it).second;
 	// exit function
+	// cout << currentRoom << endl;
 	return;
       }
     }
@@ -411,11 +415,41 @@ void MOVE(Room* &currentRoom) {
 }
 
 // take function
-void TAKE(Room* &currentRoom, vector<Item*> &inv) {
-  // do the thing
+void TAKE(Room* currentRoom, vector<Item*>* inv) {
+  /*
+  // creates input int
+  int idToTake;
+  // if the room is empty
+  if (currentRoom->getItems()->size() == 0) {
+    // let the player know
+    cout << "there is nothing to take!" << endl;
+  }
+  // otherwise
+  else {
+    // prompt user for input
+    cout << "which item would you like to take? use the number in parentheses on the list." << endl;
+    // take user input
+    cin >> idToTake;
+    // create an iterator
+    vector<Item*>::iterator it;
+    // run through items in room
+    for (it = (currentRoom->getItems())->begin(); it != (currentRoom->getItems())->end(); it++) {
+      // if idToTake matches
+      if (idToTake == (*it)->itemID) {
+	inv->push_back(*it);
+	currentRoom->getItems()->erase(it);
+	return;
+      }
+      else {
+	continue;
+      }
+    }
+    cout << "no item exists in this room with that ID!" << endl;
+  }
+  */
 }
 
 // drop function
-void DROP(void) {
+void DROP(Room* currentRoom, vector<Item*>* inv) {
   // do the thing
 }
