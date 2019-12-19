@@ -7,7 +7,7 @@ using namespace std;
 // class for rooms
 
 // constructor
-Room::Room(char* newDescription, vector<Item*> newItems) {
+Room::Room(char* newDescription, vector<Item*>* newItems) {
   description = newDescription;
   items = newItems;
 }
@@ -18,11 +18,16 @@ char* Room::getDescription() {
 }
 
 // getItems function
-vector<Item*> Room::getItems() {
+vector<Item*>* Room::getItems() {
   return items;
 }
 
 // setExits function
 void Room::setExits(map<char*,Room*>* roomMap) {
   exits = roomMap;
+}
+
+// getExits function
+map<char*,Room*>* Room::getExits() {
+  return exits;
 }

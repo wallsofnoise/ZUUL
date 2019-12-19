@@ -21,16 +21,16 @@ struct Item {
 class Room {
  public:
   // constructor
-  Room(char*,vector<Item*>);
+  Room(char*,vector<Item*>*);
   
   // function prototypes
   char* getDescription();
-  vector<Item*> getItems();
+  vector<Item*>* getItems();
   void setExits(map<char*,Room*>*);
-
+  map<char*,Room*>* getExits();
   // variables
   char* description;
-  vector<Item*> items;
+  vector<Item*>* items;
   map<char*,Room*>* exits;
 };
 
