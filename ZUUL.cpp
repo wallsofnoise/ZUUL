@@ -393,7 +393,6 @@ void MOVE(Room** currentRoom) {
   map<char*,Room*>::iterator it;
   // move through iterator
   for (it = ((*currentRoom)->getExits())->begin(); it != ((*currentRoom)->getExits())->end(); it++) {
-    cout << it;
     // if the direction inputted works
     if(strcmp(directionMoved,(*it).first) == 0) {
       if ((*it).second != NULL) {
